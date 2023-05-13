@@ -1,0 +1,17 @@
+import mongoose from 'mongoose';
+
+let connection: typeof mongoose;
+
+const mongoConnect = 'mongodb://localhost:27017'
+
+export const connectDatabase = async () => {
+  mongoose.set('runValidators', true);
+
+  connection = await mongoose.connect(mongoConnect);
+};
+
+export const disconnectDatabase = async () => {
+  if (connection) {
+    await connection.disconnect();
+  }
+};
