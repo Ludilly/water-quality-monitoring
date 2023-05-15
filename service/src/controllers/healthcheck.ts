@@ -1,4 +1,5 @@
 import server from 'express';
+import { statusResponse } from '../utils/statusCode';
 
 export const healthcheck = async (request: server.Request, response: server.Response) => {
   try {
@@ -8,8 +9,8 @@ export const healthcheck = async (request: server.Request, response: server.Resp
       timestamp: Date.now(),
     };
 
-    return response.status(200).json({ healthcheckResponse });
+    return response.status(statusResponse.OK).json({ healthcheckResponse });
   } catch (error: any) {
-    return response.status(500).json({ message: 'Internal server Error' });
+    return response.status(statusResponse.INTERNAL_SERVER_ERROR).json({ message: 'Internal server Error' });
   }
 };
