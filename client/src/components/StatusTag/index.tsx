@@ -6,8 +6,8 @@ type Status = {
 
 const StatusTag = ({ status }: Status) => {
   const COLOR_STATUS: { [key: string]: string } = {
-    'Análise Aprovada': '#27AE60',
-    'Análise Reprovada': '#D32F2F',
+    'Valor dentro da média': '#27AE60',
+    'Valor acima da média': '#D32F2F',
   };
 
   return (
@@ -15,11 +15,10 @@ const StatusTag = ({ status }: Status) => {
       <Chip
         label={status}
         sx={{
-          fontFamily: 'Inter var',
           fontWeight: 500,
           fontSize: '12px',
           lineHeight: '20px',
-          height: '24px',
+          height: '32px',
           color: '#F4F4EF',
           backgroundColor: COLOR_STATUS[status] ?? 'rgba(0, 0, 0, 0.38)',
         }}

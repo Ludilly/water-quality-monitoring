@@ -10,7 +10,7 @@ import { App } from './App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ToastContainer autoClose={3000} position='bottom-right' />
+    <ToastContainer autoClose={3000} position='top-right' />
     <BrowserRouter>
       <App />
     </BrowserRouter>

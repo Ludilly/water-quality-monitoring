@@ -1,4 +1,3 @@
-// import React from 'react';
 import { DocumentScannerOutlined } from '@mui/icons-material';
 import { Box, Icon, Typography } from '@mui/material';
 

@@ -1,116 +1,110 @@
-import React from 'react'
-import {
-  Box,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TablePagination
-} from '@material-ui/core';
+import { ChangeEvent, useState } from 'react';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
+import StatusTag from '../StatusTag';
+import { AgentsNames } from '../../enums';
+import Loading from '../Loading';
 import EmptyTable from './EmptyTable';
-import CustomColumns from './CustomColumn';
 
-type Column = {
+interface Column {
   id: string;
   label: string;
   align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
   minWidth?: number;
-  cell: (row: any) => React.ReactNode;
-};
+  borderRadius?: string;
+  render?: (value: any) => React.ReactNode;
+}
 
-type Row = {
+interface Row {
   id: string;
   [key: string]: any;
-};
+}
 
-type Props = {
-  isLoading: boolean;
-  rows: Row[];
+interface CustomTableProps {
   columns: Column[];
-  order: 'asc' | 'desc';
-  page: number;
-  orderBy: string;
-  totalItems: number;
-  allowOrderOptions: string[];
-  rowsPerPageOptions: number[];
-  handleSort: (columnId: string) => void;
-  setPage: (page: number) => void;
-  rowsPerPage: number;
-  handleChangePage: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
-  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  rows?: Row[];
+  onSelectedRows?: (rows: Array<any>) => void | Promise<void>;
+  loading?: Boolean;
+}
 
-const CustomTable = ({
-  isLoading,
-  rows,
-  columns,
-  order,
-  page,
-  orderBy,
-  totalItems,
-  allowOrderOptions,
-  rowsPerPageOptions,
-  handleSort,
-  setPage,
-  rowsPerPage,
-  handleChangePage,
-  handleChangeRowsPerPage,
-}: Props) => {
-  // if (isLoading) return <Loading />;
+const CustomTable: React.FC<CustomTableProps> = ({ columns, rows, onSelectedRows, loading }) => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  if (!rows.length) return <EmptyTable />;
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(Number(event.target.value));
+    setPage(0);
+  };
 
   return (
-    <Box>
-      <Paper>
-        <TableContainer>
-          <Table stickyHeader aria-label='sticky table'>
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <CustomColumns
-                    key={column.id}
-                    column={column}
-                    handleSort={handleSort}
-                    orderBy={orderBy}
-                    order={order}
-                    allowOrderOptions={allowOrderOptions}
-                  />
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow hover key={row.id}>
-                  {columns.map((column) => column.cell(row))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+    <Box
+      sx={{
+        width: '100%',
+        marginTop: '32px',
 
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component='div'
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage='Linhas por pág.'
-          backIconButtonProps={{
-            'aria-label': 'Próxima página',
+      }}
+    >
+      {!rows!.length ? <EmptyTable /> : (
+        <Paper
+          sx={{
+            width: '100%',
           }}
-          nextIconButtonProps={{
-            'aria-label': 'Página Anterior',
-          }}
-        />
-      </Paper>
+        >
+          <TableContainer sx={{ maxHeight: '590px' }}>
+            <Table stickyHeader aria-label='sticky table'>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      sx={{ background: '#D7DCDF' }}
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth, borderRadius: column.borderRadius }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody sx={{ backgroundColor: '#FFFFFF' }}>
+                {rows!.map((row) => (
+                  <TableRow>
+                    <TableCell>{AgentsNames[row.agente as keyof typeof AgentsNames]}</TableCell>
+                    <TableCell>{row.pontoDeColeta}</TableCell>
+                    <TableCell>{row.cidade}</TableCell>
+                    <TableCell>{row.estado}</TableCell>
+                    <TableCell>{row.valor}</TableCell>
+                    <TableCell>{row.limiteMaximo}</TableCell>
+                    <TableCell>{<StatusTag status={row.status} />}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            sx={{ div: { lineHeight: '1.4375em' } }}
+            rowsPerPageOptions={[10, 25, 100]}
+            component='div'
+            count={rows!.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage='Linhas por pág.'
+            backIconButtonProps={{
+              'aria-label': 'Próxima página',
+            }}
+            nextIconButtonProps={{
+              'aria-label': 'Página Anterior',
+            }}
+          />
+        </Paper>
+      )}
     </Box>
   );
-};
+}
 
 export default CustomTable;
