@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Box, Button, Dialog, Grid, Icon, Select, SelectChangeEvent, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -7,9 +6,12 @@ import { columns, dropdownOptions } from './config';
 import CustomTable from '../../components/Table';
 import CustomSelect from '../../components/CustomSelect';
 import CreateAnalysisForm from '../../components/CreateAnalysisForm';
+import UpdateAnalysisForm from '../../components/UpdateAnalysisForm';
+import { fetchAnalysis } from '../../services';
 
 const Home = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
+  const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
   const [rows, setRows] = useState<any>([]);
   const [optionValue, setOptionValue] = useState<string>('');
 
@@ -17,23 +19,21 @@ const Home = () => {
     setOptionValue(event.target.value as string);
   };
 
-  const handleClickOpenModal = () => {
-    setOpenModal(true);
+  const handleClickOpenCreateModal = () => {
+    setOpenCreateModal(true);
   };
 
-  const fetchAnalysis = async () => {
-    try {
-      const { status, data } = await axios.get('http://localhost:8002/analysis');
+  const handleClickOpenUpdateModal = () => {
+    setOpenUpdateModal(true);
+  };
 
-      if (status === 200) setRows(data.result);
-
-    } catch (error) {
-      console.error(error);
-    };
+  const handleCloseModal = () => {
+    setOpenCreateModal(false);
+    setOpenUpdateModal(false);
   };
 
   useEffect(() => {
-    fetchAnalysis();
+    fetchAnalysis(setRows);
   }, []);
 
   return (
@@ -44,7 +44,7 @@ const Home = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <CustomSelect optionValue={optionValue} handleChange={handleChange} options={dropdownOptions} />
         <Box sx={{ display: 'flex', flexDirection: 'row', width: '360px' }}>
-          <Button
+        <Button
             type='button'
             sx={{
               display: 'flex',
@@ -58,6 +58,7 @@ const Home = () => {
                 backgroundColor: '#94A3B8',
               }
             }}
+            onClick={handleClickOpenUpdateModal}
           >
             <Icon sx={{ display: 'flex', marginRight: '8px' }}>
               <ModeEditIcon />
@@ -78,7 +79,7 @@ const Home = () => {
                 backgroundColor: '#94A3B8',
               }
             }}
-            onClick={handleClickOpenModal}
+            onClick={handleClickOpenCreateModal}
           >
             <Icon sx={{ display: 'flex', marginRight: '8px' }}>
               <AddIcon />
@@ -88,7 +89,8 @@ const Home = () => {
         </Box>
       </Box>
       <CustomTable rows={rows} columns={columns} />
-      {openModal && <CreateAnalysisForm openModal={openModal} setOpenModal={setOpenModal} />}
+      {openCreateModal && <CreateAnalysisForm openModal={openCreateModal} setOpenModal={handleCloseModal} />}
+      {openUpdateModal && <UpdateAnalysisForm openModal={openUpdateModal} setOpenModal={handleCloseModal} />}
     </Grid>
   );
 };
