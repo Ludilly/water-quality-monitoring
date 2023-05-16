@@ -8,6 +8,7 @@ export const getAllAnalysis = async() => {
     const result = await SampleAnalyzedModel.find();
     return result;
   } catch (error: any) {
+    console.log(error)
     return error.message;
   } finally {
     await disconnectDatabase();

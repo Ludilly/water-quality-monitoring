@@ -1,7 +1,17 @@
 import server from 'express';
-import { getAnalysisByAgent, getAnalysisByPontoDeColeta, getAnalysisByStatus } from '../../services/getByParams';
+import { getAnalysisByAgent, getAnalysisById, getAnalysisByPontoDeColeta, getAnalysisByStatus } from '../../services/getByParams';
 import { statusResponse } from '../../utils/statusCode';
-import { AGENTS_NAME } from '../../enum';
+
+export const getAnalysisByIdController = async(req: server.Request, res: server.Response) => {
+  try {
+    const { id } = req.params;
+    const result = await getAnalysisById(id);
+
+    return res.status(statusResponse.OK).json({ result });
+  } catch (error) {
+    return res.status(statusResponse.INTERNAL_SERVER_ERROR).json({ message: 'Internal server Error' });
+  };
+};
 
 
 export const getAnalysisByAgentController = async(req: server.Request, res: server.Response) => {
@@ -13,9 +23,8 @@ export const getAnalysisByAgentController = async(req: server.Request, res: serv
     return res.status(statusResponse.OK).json({ result });
   } catch (error) {
     return res.status(statusResponse.INTERNAL_SERVER_ERROR).json({ message: 'Internal server Error' });
-
-  }
-}
+  };
+};
 
 
 export const getAnalysisByStatusController = async(req: server.Request, res: server.Response) => {
@@ -26,9 +35,8 @@ export const getAnalysisByStatusController = async(req: server.Request, res: ser
     return res.status(statusResponse.OK).json({ result });
   } catch (error) {
     return res.status(statusResponse.INTERNAL_SERVER_ERROR).json({ message: 'Internal server Error' });
-
-  }
-}
+  };
+};
 
 
 export const getAnalysisByPontoDeColetaController = async(req: server.Request, res: server.Response) => {
@@ -39,6 +47,5 @@ export const getAnalysisByPontoDeColetaController = async(req: server.Request, r
     return res.status(statusResponse.OK).json({ result });
   } catch (error) {
     return res.status(statusResponse.INTERNAL_SERVER_ERROR).json({ message: 'Internal server Error' });
-
-  }
-}
+  };
+};
