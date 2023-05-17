@@ -19,10 +19,13 @@ export const getAnalysisById = async (id: string) => {
   }
 };
 
-export const getAnalysisByAgent = async (agente: string) => {
+export const getAnalysisByAgent = async (agent: string) => {
   try {
     await connectDatabase();
-    return await SampleAnalyzedModel.find({ agente });
+
+    const filteredAnalysis = await SampleAnalyzedModel.find({ agente: agent });
+
+    return filteredAnalysis;
   } catch (error: any) {
     return error.message;
   } finally {

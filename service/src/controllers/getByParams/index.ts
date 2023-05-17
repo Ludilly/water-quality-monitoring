@@ -15,9 +15,9 @@ export const getAnalysisByIdController = async (req: server.Request, res: server
 
 export const getAnalysisByAgentController = async (req: server.Request, res: server.Response) => {
   try {
-    const { agente } = req.params;
+    const { agent } = req.params;
 
-    const result = await getAnalysisByAgent(agente);
+    const result = await getAnalysisByAgent(agent);
 
     return res.status(statusResponse.OK).json({ result });
   } catch (error) {

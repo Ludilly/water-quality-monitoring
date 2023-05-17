@@ -11,9 +11,11 @@ const router = Router();
 
 router.post('/login', login);
 router.post('/createSample', authorization, createSample);
+
 router.get('/analysis', authorization, getAllAnalysisController);
+router.get('/agent/:agent', authorization, getAnalysisByAgentController);
 router.get('/analysis/:id', authorization, getAnalysisByIdController);
-router.get('/analysis/:agent', authorization, getAnalysisByAgentController);
+
 router.put('/updateSamples/:id', authorization, updateSampleContorller);
 
 router.post('/healthcheck', healthcheck);
