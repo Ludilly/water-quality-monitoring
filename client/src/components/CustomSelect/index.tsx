@@ -4,11 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
-interface Option {
-  value: string;
-  label: string;
-}
+import { Option } from '../../interfaces';
 
 interface CustomSelectProps {
   options: Option[];

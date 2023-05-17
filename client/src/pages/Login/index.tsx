@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import axios from 'axios';
+import Cookie from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Cookie from 'js-cookie';
-import axios from 'axios';
 import moment from 'moment';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material'
 import Loading from '../../components/Loading';
@@ -29,10 +29,6 @@ const Login = () => {
     };
   };
 
-  useEffect(() => {
-    logout();
-  }, [])
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -51,10 +47,6 @@ const Login = () => {
       console.error(err);
       setLoading(false);
     }
-  };
-
-  const logout = () => {
-    if (Cookie.get('token') === null) navigate('/', { replace: true });
   };
 
   return (

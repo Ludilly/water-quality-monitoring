@@ -1,23 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import StatusTag from '../StatusTag';
-import { AgentsNames } from '../../enums';
+import { AgentsLimitsUnits, AgentsNames } from '../../enums';
 import Loading from '../Loading';
 import EmptyTable from './EmptyTable';
-
-interface Column {
-  id: string;
-  label: string;
-  align?: 'inherit' | 'left' | 'center' | 'right' | 'justify';
-  minWidth?: number;
-  borderRadius?: string;
-  render?: (value: any) => React.ReactNode;
-}
-
-interface Row {
-  id: string;
-  [key: string]: any;
-}
+import { formatValueToUnit } from '../../helpers';
+import { Column, Row } from '../../interfaces';
 
 interface CustomTableProps {
   columns: Column[];
@@ -70,14 +58,14 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows, onSelectedRows
                 </TableRow>
               </TableHead>
               <TableBody sx={{ backgroundColor: '#FFFFFF' }}>
-                {rows!.map((row) => (
+                {rows!.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                   <TableRow>
                     <TableCell>{AgentsNames[row.agente as keyof typeof AgentsNames]}</TableCell>
                     <TableCell>{row.pontoDeColeta}</TableCell>
                     <TableCell>{row.cidade}</TableCell>
                     <TableCell>{row.estado}</TableCell>
-                    <TableCell>{row.valor}</TableCell>
-                    <TableCell>{row.limiteMaximo}</TableCell>
+                    <TableCell>{formatValueToUnit(row.valor, AgentsLimitsUnits[row.agente as keyof typeof AgentsLimitsUnits])}</TableCell>
+                    <TableCell>{formatValueToUnit(row.limiteMaximo, AgentsLimitsUnits[row.agente as keyof typeof AgentsLimitsUnits])}</TableCell>
                     <TableCell>{<StatusTag status={row.status} />}</TableCell>
                   </TableRow>
                 ))}

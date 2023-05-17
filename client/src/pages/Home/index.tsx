@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, Dialog, Grid, Icon, Select, SelectChangeEvent, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -8,12 +9,17 @@ import CustomSelect from '../../components/CustomSelect';
 import CreateAnalysisForm from '../../components/CreateAnalysisForm';
 import UpdateAnalysisForm from '../../components/UpdateAnalysisForm';
 import { fetchAnalysis } from '../../services';
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
   const [rows, setRows] = useState<any>([]);
   const [optionValue, setOptionValue] = useState<string>('');
+  const navigate = useNavigate();
+  const token = Cookies.get('token');
+  const [tokenValue, setTokenValue] = useState(token);
 
   const handleChange = (event: SelectChangeEvent) => {
     setOptionValue(event.target.value as string);
@@ -36,6 +42,18 @@ const Home = () => {
     fetchAnalysis(setRows);
   }, []);
 
+  const logout = () => {
+    if (!token) {
+      setTokenValue('');
+      toast.error('Você foi deslogado');
+      navigate('/', { replace: true });
+    };
+  };
+
+  useEffect(() => {
+    logout();
+  }, [tokenValue]);
+
   return (
     <Grid sx={{ padding: '32px' }}>
       <Typography variant='h4' sx={{ fontWeight: 600, fontSize: '33px', lineHeight: '40px', marginBottom: '65px' }}>
@@ -44,7 +62,7 @@ const Home = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <CustomSelect optionValue={optionValue} handleChange={handleChange} options={dropdownOptions} />
         <Box sx={{ display: 'flex', flexDirection: 'row', width: '360px' }}>
-        <Button
+          <Button
             type='button'
             sx={{
               display: 'flex',

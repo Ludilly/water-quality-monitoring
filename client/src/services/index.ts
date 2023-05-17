@@ -1,5 +1,5 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export const fetchAnalysis = async (setState:any): Promise<void> => {
   const getCookie = Cookies.get('token');
@@ -11,8 +11,7 @@ export const fetchAnalysis = async (setState:any): Promise<void> => {
     });
 
     if (status === 200) setState(data.result);
-
   } catch (error) {
     console.error(error);
-  };
+  }
 };

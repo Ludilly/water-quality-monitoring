@@ -35,16 +35,16 @@ export const columns = [
     label: 'Status',
     minWidth: 120,
     borderRadius: '0px 8px 0px 0px',
-  }
+  },
 ];
 
 export const dropdownOptions = [
-  {value: ' ALUMINIO_DISSOLVIDO', label: 'Alumínio'},
-  {value: 'ARSENIO_TOTAL', label: 'Arsênio'},
-  {value: 'CHUMBO_TOTAL', label: 'Chumbo'},
-  {value: 'COBRE_DISSOLVIDO', label: 'Cobre'},
-  {value: 'ESCHERICHIA_COLI', label: 'Escherichia coli'},
-  {value: 'CROMO_TOTAL', label: 'Cromo'},
-  {value: 'CADMIO_TOTAL', label: 'Cadmio'},
-  {value: 'DBO', label: 'DBO'},
+  { value: ' ALUMINIO_DISSOLVIDO', label: 'Alumínio' },
+  { value: 'ARSENIO_TOTAL', label: 'Arsênio' },
+  { value: 'CHUMBO_TOTAL', label: 'Chumbo' },
+  { value: 'COBRE_DISSOLVIDO', label: 'Cobre' },
+  { value: 'ESCHERICHIA_COLI', label: 'Escherichia coli' },
+  { value: 'CROMO_TOTAL', label: 'Cromo' },
+  { value: 'CADMIO_TOTAL', label: 'Cadmio' },
+  { value: 'DBO', label: 'DBO' },
 ];
