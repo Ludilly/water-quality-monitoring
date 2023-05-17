@@ -1,5 +1,5 @@
 import SampleAnalyzedModel from '../../../model';
-import { connectDatabase, disconnectDatabase } from "../../../model/database";
+import { connectDatabase, disconnectDatabase } from '../../../model/database';
 
 export const getAnalysisById = async (id: string) => {
   try {
@@ -11,24 +11,21 @@ export const getAnalysisById = async (id: string) => {
       throw new Error('Análise não encontrada');
     }
 
-    return analysis
-    
+    return analysis;
   } catch (error: any) {
     return error.message;
   } finally {
     await disconnectDatabase();
   }
-}
-
+};
 
 export const getAnalysisByAgent = async (agente: string) => {
   try {
     await connectDatabase();
-    return await SampleAnalyzedModel.find({ agente: agente });
-
+    return await SampleAnalyzedModel.find({ agente });
   } catch (error: any) {
     return error.message;
   } finally {
     await disconnectDatabase();
   }
-}
+};

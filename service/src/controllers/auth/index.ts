@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
+import { userData } from '../../data';
+import { statusResponse } from '../../utils/statusCode';
+
 const md5 = require('md5');
 const JWT = require('jsonwebtoken');
-import { userData } from "../../data";
-import { statusResponse } from '../../utils/statusCode';
 
 const JWTCONFIG = {
   expiresIn: '1d',
@@ -12,12 +13,8 @@ interface User {
   email: string;
   name: string;
 }
-interface TokenData {
-  data: User;
-}
 
 export const login = async (req: Request, res: Response) => {
-
   const { JWTSECRET } = process.env;
 
   try {

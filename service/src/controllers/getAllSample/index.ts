@@ -2,7 +2,6 @@ import server from 'express';
 import { getAllAnalysis } from '../../services/getAllAnalysis';
 import { statusResponse } from '../../utils/statusCode';
 
-
 export const getAllAnalysisController = async (_req: server.Request, res: server.Response) => {
   try {
     const result = await getAllAnalysis();

@@ -2,10 +2,11 @@ import server from 'express';
 import { statusResponse } from '../../utils/statusCode';
 import { updateSampleById } from '../../services/updateSample';
 
-
 export const updateSampleContorller = async (req: server.Request, res: server.Response) => {
   const { id } = req.params;
-  const { agente, valor, cidade, estado, pontoDeColeta } = req.body;
+  const {
+    agente, valor, cidade, estado, pontoDeColeta,
+  } = req.body;
   try {
     const result = await updateSampleById({
       id,
@@ -13,7 +14,7 @@ export const updateSampleContorller = async (req: server.Request, res: server.Re
       valor,
       cidade,
       estado,
-      pontoDeColeta
+      pontoDeColeta,
     });
 
     return res.status(statusResponse.OK).json({ result });

@@ -20,4 +20,4 @@ const SampleAnalyzed = new Schema({
   status: { type: String, required: true },
 });
 
-export default model<ISampleAnalyzed>('SampleAnalyzed ', SampleAnalyzed );
+export default model<ISampleAnalyzed>('SampleAnalyzed ', SampleAnalyzed);

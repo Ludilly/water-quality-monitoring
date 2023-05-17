@@ -1,5 +1,5 @@
 import server from 'express';
-import {createSampleAnalysis} from '../../services/createSample';
+import { createSampleAnalysis } from '../../services/createSample';
 
 export const createSample = async (req: server.Request, res: server.Response) => {
   try {

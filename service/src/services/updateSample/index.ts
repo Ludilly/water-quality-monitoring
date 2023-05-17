@@ -1,7 +1,8 @@
-const { ObjectId } = require('mongodb');
-import { connectDatabase, disconnectDatabase } from "../../../model/database";
+import { connectDatabase, disconnectDatabase } from '../../../model/database';
 import SampleAnalyzedModel from '../../../model';
-import { AGENTS_LIMITS } from "../../enum";
+import { AGENTS_LIMITS } from '../../enum';
+
+const { ObjectId } = require('mongodb');
 
 type UpdateData = {
   id: String;
@@ -12,18 +13,22 @@ type UpdateData = {
   pontoDeColeta: String;
 }
 
-export const updateSampleById = async ({ id, agente, valor, cidade, estado, pontoDeColeta }: UpdateData) => {
+export const updateSampleById = async ({
+  id, agente, valor, cidade, estado, pontoDeColeta,
+}: UpdateData) => {
   try {
     await connectDatabase();
-    // informar no front pro usuário colocar o valor em ml com alerts e placeholders
-    await SampleAnalyzedModel.findOne({_id:ObjectId(id)});
+    await SampleAnalyzedModel.findOne({ _id: ObjectId(id) });
     const updateAnalysisById = await SampleAnalyzedModel
-      .updateOne({ $set: { agente, valor, cidade, estado, pontoDeColeta, limiteMaximo: AGENTS_LIMITS[agente] } });
+      .updateOne({
+        $set: {
+          agente, valor, cidade, estado, pontoDeColeta, limiteMaximo: AGENTS_LIMITS[agente],
+        },
+      });
     return updateAnalysisById;
-
   } catch (error) {
-    throw error
+    console.error(error);
   } finally {
     await disconnectDatabase();
   }
-}
+};

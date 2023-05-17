@@ -22,7 +22,6 @@ export const authorization = (req: Request, res: Response, next: NextFunction) =
     (req as CustomRequest).token = data;
 
     next();
-
   } catch (error) {
     console.error(error);
   }

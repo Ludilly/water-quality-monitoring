@@ -7,7 +7,7 @@ export enum AGENTS_LIMITS {
   CROMO_TOTAL = 0.05,
   CADMIO_TOTAL = 0.001,
   DBO = 5
-};
+}
 
 export enum AGENTS_NAME {
   ALUMINIO_DISSOLVIDO = 'aluminio',
@@ -18,5 +18,4 @@ export enum AGENTS_NAME {
   CROMO_TOTAL = 'cromo',
   CADMIO_TOTAL = 'cadmio',
   DBO = 'dbo'
-};
-
+}
