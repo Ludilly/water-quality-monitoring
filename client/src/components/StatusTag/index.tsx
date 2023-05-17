@@ -7,7 +7,7 @@ type Status = {
 const StatusTag = ({ status }: Status) => {
   const COLOR_STATUS: { [key: string]: string } = {
     'Valor dentro da média': '#27AE60',
-    'Valor acima da média': '#D32F2F',
+    'Valor acima da média permitida': '#D32F2F',
   };
 
   return (

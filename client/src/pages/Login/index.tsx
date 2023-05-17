@@ -37,7 +37,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { status, data } = await axios.post('http://localhost:8002/login', credentials);
+      const { status, data } = await axios.post('http://localhost:3005/login', credentials);
       if (status === 200) {
         Cookie.set('token', JSON.stringify(data.token), {
           expires: moment().add(24, 'hours').toDate(),
