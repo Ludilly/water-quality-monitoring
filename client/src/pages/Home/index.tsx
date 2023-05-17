@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Dialog, Grid, Icon, Select, SelectChangeEvent, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid,
+  Icon,
+  SelectChangeEvent,
+  Typography,
+} from '@mui/material';
+import Cookies from 'js-cookie';
 import AddIcon from '@mui/icons-material/Add';
+import { toast } from 'react-toastify';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { columns, dropdownOptions } from './config';
 import CustomTable from '../../components/Table';
 import CustomSelect from '../../components/CustomSelect';
 import CreateAnalysisForm from '../../components/CreateAnalysisForm';
 import UpdateAnalysisForm from '../../components/UpdateAnalysisForm';
-import { fetchAnalysis } from '../../services';
-import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
+import { fetchAnalysis, getAnalysisByName } from '../../services';
 
 const Home = () => {
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
@@ -42,12 +49,17 @@ const Home = () => {
     fetchAnalysis(setRows);
   }, []);
 
+  useEffect(() => {
+    getAnalysisByName(setRows, optionValue);
+    console.log(optionValue);
+  }, [optionValue]);
+
   const logout = () => {
     if (!token) {
       setTokenValue('');
       toast.error('Você foi deslogado');
       navigate('/', { replace: true });
-    };
+    }
   };
 
   useEffect(() => {
@@ -56,11 +68,18 @@ const Home = () => {
 
   return (
     <Grid sx={{ padding: '32px' }}>
-      <Typography variant='h4' sx={{ fontWeight: 600, fontSize: '33px', lineHeight: '40px', marginBottom: '65px' }}>
+      <Typography
+        variant='h4'
+        sx={{ fontWeight: 600, fontSize: '33px', lineHeight: '40px', marginBottom: '65px' }}
+      >
         Tabela de amostras
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <CustomSelect optionValue={optionValue} handleChange={handleChange} options={dropdownOptions} />
+        <CustomSelect
+          optionValue={optionValue}
+          handleChange={handleChange}
+          options={dropdownOptions}
+        />
         <Box sx={{ display: 'flex', flexDirection: 'row', width: '360px' }}>
           <Button
             type='button'
@@ -72,9 +91,9 @@ const Home = () => {
               color: '#f4f4f4',
               marginRight: '32px',
               height: '44px',
-              "&:hover": {
+              '&:hover': {
                 backgroundColor: '#94A3B8',
-              }
+              },
             }}
             onClick={handleClickOpenUpdateModal}
           >
@@ -93,9 +112,9 @@ const Home = () => {
               backgroundColor: '#94A3B8',
               color: '#f4f4f4',
               height: '44px',
-              "&:hover": {
+              '&:hover': {
                 backgroundColor: '#94A3B8',
-              }
+              },
             }}
             onClick={handleClickOpenCreateModal}
           >
@@ -107,8 +126,10 @@ const Home = () => {
         </Box>
       </Box>
       <CustomTable rows={rows} columns={columns} />
-      {openCreateModal && <CreateAnalysisForm openModal={openCreateModal} setOpenModal={handleCloseModal} />}
-      {openUpdateModal && <UpdateAnalysisForm openModal={openUpdateModal} setOpenModal={handleCloseModal} />}
+      {openCreateModal
+        && <CreateAnalysisForm openModal={openCreateModal} setOpenModal={handleCloseModal} />}
+      {openUpdateModal
+        && <UpdateAnalysisForm openModal={openUpdateModal} setOpenModal={handleCloseModal} />}
     </Grid>
   );
 };

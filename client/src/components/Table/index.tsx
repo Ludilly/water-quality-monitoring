@@ -1,8 +1,17 @@
-import { ChangeEvent, useState } from 'react';
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
+import React, { ChangeEvent, useState } from 'react';
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+} from '@mui/material';
 import StatusTag from '../StatusTag';
 import { AgentsLimitsUnits, AgentsNames } from '../../enums';
-import Loading from '../Loading';
 import EmptyTable from './EmptyTable';
 import { formatValueToUnit } from '../../helpers';
 import { Column, Row } from '../../interfaces';
@@ -10,11 +19,9 @@ import { Column, Row } from '../../interfaces';
 interface CustomTableProps {
   columns: Column[];
   rows?: Row[];
-  onSelectedRows?: (rows: Array<any>) => void | Promise<void>;
-  loading?: Boolean;
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ columns, rows, onSelectedRows, loading }) => {
+const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -58,17 +65,28 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows, onSelectedRows
                 </TableRow>
               </TableHead>
               <TableBody sx={{ backgroundColor: '#FFFFFF' }}>
-                {rows!.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                  <TableRow>
-                    <TableCell>{AgentsNames[row.agente as keyof typeof AgentsNames]}</TableCell>
-                    <TableCell>{row.pontoDeColeta}</TableCell>
-                    <TableCell>{row.cidade}</TableCell>
-                    <TableCell>{row.estado}</TableCell>
-                    <TableCell>{formatValueToUnit(row.valor, AgentsLimitsUnits[row.agente as keyof typeof AgentsLimitsUnits])}</TableCell>
-                    <TableCell>{formatValueToUnit(row.limiteMaximo, AgentsLimitsUnits[row.agente as keyof typeof AgentsLimitsUnits])}</TableCell>
-                    <TableCell>{<StatusTag status={row.status} />}</TableCell>
-                  </TableRow>
-                ))}
+                {Array.isArray(rows)
+                  && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                    <TableRow>
+                      <TableCell>{AgentsNames[row.agente as keyof typeof AgentsNames]}</TableCell>
+                      <TableCell>{row.pontoDeColeta}</TableCell>
+                      <TableCell>{row.cidade}</TableCell>
+                      <TableCell>{row.estado}</TableCell>
+                      <TableCell>
+                        {formatValueToUnit(
+                          row.valor,
+                          AgentsLimitsUnits[row.agente as keyof typeof AgentsLimitsUnits],
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {formatValueToUnit(
+                          row.limiteMaximo,
+                          AgentsLimitsUnits[row.agente as keyof typeof AgentsLimitsUnits],
+                        )}
+                      </TableCell>
+                      <TableCell><StatusTag status={row.status} /></TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
@@ -93,6 +111,6 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows, onSelectedRows
       )}
     </Box>
   );
-}
+};
 
 export default CustomTable;

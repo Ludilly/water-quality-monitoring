@@ -12,28 +12,26 @@ interface CustomSelectProps {
   optionValue: string;
 }
 
-const CustomSelect = ({ options, handleChange, optionValue }: CustomSelectProps) => {
-  return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="filter-select-label">Filtros</InputLabel>
-        <Select
-          sx={{ width: '320px' }}
-          labelId="filter-select-label"
-          id="filter-simple-select"
-          value={optionValue}
-          label="Filtros"
-          onChange={handleChange}
-        >
-          {options!.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
-  );
-};
+const CustomSelect = ({ options, handleChange, optionValue }: CustomSelectProps) => (
+  <Box sx={{ minWidth: 120 }}>
+    <FormControl fullWidth>
+      <InputLabel id='filter-select-label'>Filtros</InputLabel>
+      <Select
+        sx={{ width: '320px' }}
+        labelId='filter-select-label'
+        id='filter-simple-select'
+        value={optionValue}
+        label='Filtros'
+        onChange={handleChange}
+      >
+        {options!.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </Box>
+);
 
 export default CustomSelect;

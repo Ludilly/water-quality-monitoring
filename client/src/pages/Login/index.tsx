@@ -4,7 +4,7 @@ import Cookie from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from 'moment';
-import { Box, Button, Grid, TextField, Typography } from '@mui/material'
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import Loading from '../../components/Loading';
 
 const Login = () => {
@@ -23,10 +23,10 @@ const Login = () => {
     }));
 
     if (credentials.password.length <= NUMBER_OF_CHARACTERS) {
-      setErro(true)
+      setErro(true);
     } else {
       setErro(false);
-    };
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ const Login = () => {
         Cookie.set('token', JSON.stringify(data.token), {
           expires: moment().add(24, 'hours').toDate(),
         });
-        toast.success('Você está logado!')
+        toast.success('Você está logado!');
         navigate('/home');
       }
       setLoading(false);
@@ -59,7 +59,8 @@ const Login = () => {
             alignItems: 'flex-start',
             display: 'flex',
             flexDirection: 'column',
-          }}>
+          }}
+        >
           <Typography variant='h2' sx={{ fontWeight: 600, fontSize: '47px' }}>
             Boas vindas!
           </Typography>
@@ -98,17 +99,18 @@ const Login = () => {
               backgroundColor: '#94A3B8',
               color: '#f4f4f4',
               height: '54px',
-              "&:hover": {
+              '&:hover': {
                 backgroundColor: '#94A3B8',
-              }
-            }}>
+              },
+            }}
+          >
             {loading ? <Loading /> : 'Login'}
           </Button>
         </Box>
       </form>
       <Box sx={{ backgroundColor: '#06102B', height: '100vh', width: '50%' }} />
     </Grid>
-  )
-}
+  );
+};
 
 export default Login;
