@@ -2,24 +2,24 @@ import { Request, Response } from 'express';
 const md5 = require('md5');
 const JWT = require('jsonwebtoken');
 import { userData } from "../../data";
-const jwtKey = '624e771f-f59d-4a24-8431-d92d119f0556';
 import { statusResponse } from '../../utils/statusCode';
 
 const JWTCONFIG = {
   expiresIn: '1d',
   algorithm: 'HS256',
 };
-
 interface User {
   email: string;
   name: string;
 }
-
 interface TokenData {
   data: User;
 }
 
 export const login = async (req: Request, res: Response) => {
+
+  const { JWTSECRET } = process.env;
+
   try {
     const { email, password } = req.body;
 
@@ -31,7 +31,7 @@ export const login = async (req: Request, res: Response) => {
       email: userData.email,
       name: userData.name,
     };
-    const token: string = JWT.sign({ data: userToken }, jwtKey, JWTCONFIG);
+    const token: string = JWT.sign({ data: userToken }, JWTSECRET, JWTCONFIG);
 
     return res.status(statusResponse.OK).json({ email, token });
   } catch (e: any) {

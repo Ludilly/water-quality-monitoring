@@ -4,23 +4,17 @@ import { login } from '../controllers/auth';
 import { createSample } from '../controllers/createSample';
 import { getAllAnalysisController } from '../controllers/getAllSample';
 import { updateSampleContorller } from '../controllers/updateSample';
-import {
-    getAnalysisByAgentController,
-    getAnalysisByIdController,
-    getAnalysisByPontoDeColetaController,
-    getAnalysisByStatusController
-} from '../controllers/getByParams';
+import { getAnalysisByAgentController, getAnalysisByIdController } from '../controllers/getByParams';
+import { authorization } from '../middlewares/auth';
 
 const router = Router();
 
 router.post('/login', login);
-router.post('/createSample', createSample);
-router.get('/analysis', getAllAnalysisController);
-router.get('/analysis/:id', getAnalysisByIdController);
-router.get('/analysis/:agent', getAnalysisByAgentController);
-router.get('/analysis/:status', getAnalysisByStatusController);
-router.get('/analysis/:pontoDeColeta', getAnalysisByPontoDeColetaController);
-router.put('/updateSamples/:id', updateSampleContorller);
+router.post('/createSample', authorization, createSample);
+router.get('/analysis', authorization, getAllAnalysisController);
+router.get('/analysis/:id', authorization, getAnalysisByIdController);
+router.get('/analysis/:agent', authorization, getAnalysisByAgentController);
+router.put('/updateSamples/:id', authorization, updateSampleContorller);
 
 router.post('/healthcheck', healthcheck);
 
