@@ -126,6 +126,10 @@ Cria uma análise para ser renderizada
 
 Pois o sistema não existe um sistema de criação de usuários
 
+## Front
+
+[peek2NXE51.webm](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/4871ad90-e960-4e29-9a9e-e729e9ce907c)
+
 
 ## O que poderia melhorar?
 
