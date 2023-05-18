@@ -72,7 +72,9 @@ Execute o comando `npm i` ou `npm install` para instalar as dependencias do proj
 
 Rode o comando `npm run dev para startar a aplicação, que irá rodar na porta 5173.
 
-OBS.: Para logar, xxxxxxxxxx
+OBS.: Para logar, utilize o email:
+`luiza@email.com`
+`secretpassword`
 
 
 ---
@@ -111,6 +113,15 @@ Uma amostra é atualizada ao passar um `id` como parâmetro
 
 Cria uma análise para ser renderizada
 ![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/99027260-77de-4007-9141-70abdb855a35)
+
+
+##CONGIFS IMPORTANTES
+
+É necessário setar os valores das envs com esses valores:
+`PORT=3005`
+`JWTSECRET='624e771f-f59d-4a24-8431-d92d119f0556'`
+
+Pois o sistema não existe um sistema de criação de usuários
 
 
 ## O que poderia melhorar?
