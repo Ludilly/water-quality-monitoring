@@ -30,11 +30,6 @@ A lógica de requisições foi separada em uma pasta de Service, e utiliza o fra
 
 Como nao foi passado um padrão de design, para facilitar a estilização, utilizei a bilbioteca Material Ui, que traz um design-system moderno, fluido e responsivo. Também fiz algumas alterações no tema padrão para que a aplicação tenha um fundo escura, que passa uma impressão de maior seriedade, credibilidade e por conta do contraste, recebe imagens, logos e texto sem comprometer a experiência do usuário.
 
-Já o Backend foi feito em Node, com MSC. O banco de dados foi convertido em JSON e as funções de readFile e writeFile foram utilizadas na criação do CRUD. Os testes foram criados
-utilizando o `frisby`. Além disso, é importante ressaltar que a porta utilizada foi a 3001, no intuito de evitar conflitos com o Frontend.
-
-É importante enfatizar que nesse projeto o ESlint foi utilizado tanto na pasta "Service" quanto na "Client".
-
 ## Setup do projeto Backend
 
 Por se tratar de uma API simples, decidi por uma arquitetura com um Modulo Service e Controller, separando cada contexto de aplicação, facilitando assim a manutenção de uma rota específica.
