@@ -35,7 +35,8 @@ A autenticação é salva pela lib Cookies.js, onde a mesma é usada pra fazer o
 
 A lógica de requisições foi separada em uma pasta de Service, e utiliza o framework Axios para executar as chamadas para o backend.
 
-Como nao foi passado um padrão de design, para facilitar a estilização, utilizei a bilbioteca Material Ui, que traz um design-system moderno, fluido e responsivo. Também fiz algumas alterações no tema padrão para que a aplicação tenha um fundo escura, que passa uma impressão de maior seriedade, credibilidade e por conta do contraste, recebe imagens, logos e texto sem comprometer a experiência do usuário.
+Como nao foi passado um padrão de design, para facilitar a estilização, utilizei a bilbioteca Material Ui, que traz um design-system moderno, fluido e responsivo. Também fiz algumas alterações no 
+rão para que a aplicação tenha um fundo escuro, que passa uma impressão de maior seriedade, credibilidade e por conta do contraste, recebe imagens, logos e texto sem comprometer a experiência do usuário.
 
 ## Setup do projeto Backend
 
@@ -43,7 +44,8 @@ Por se tratar de uma API simples, decidi por uma arquitetura com um Modulo Servi
 
 O banco de dados foi construído com Mongodb e para construir os schemas de forma mais simples, o Mongoose foi utilizado.
 
-O banco foi configurado para rodar em um container do Docker, junto com o backend, configurado através de um arquivo docker-compose.yml, o que facilita a sua execução.
+O banco foi 
+urado para rodar em um container do Docker, junto com o backend, configurado através de um arquivo docker-compose.yml, o que facilita a sua execução.
 
 Rotas: 
 
@@ -80,7 +82,7 @@ para isso, utilize o comando `nvm use 16xxxx ` ou maior
 
 Execute o comando `npm i` ou `npm install` para instalar as dependencias do projeto
 
-Rode o comando `npm run dev para startar a aplicação, que irá rodar na porta 5173.
+Rode o comando `npm run dev` para startar a aplicação, que irá rodar na `porta 5173`.
 
 OBS.: Para logar, utilize o email:
 `luiza@email.com`
@@ -102,7 +104,7 @@ Caso a autenticação seja bem sucedida, será retornado um token JWT com valida
 ## GET/analysis
 Retorna uma lista com todos as análises criadas pelo usuário.
 
-Essa rota exige a autenticação através do token,gerado pela rota `POST /auth` e a passagem do username no header da requisição para possibilitar a busca dos projetos, que só acontecerá caso o token seja compatível com o usuário.
+Essa rota exige a autenticação através do token, gerado pela rota `POST /login` e a passagem do username no header da requisição para possibilitar a busca dos projetos, que só acontecerá caso o token seja compatível com o usuário.
 
 ## GET/analysis:id
 
@@ -125,7 +127,7 @@ Cria uma análise para ser renderizada
 ![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/99027260-77de-4007-9141-70abdb855a35)
 
 
-##CONGIFS IMPORTANTES
+## CONGIFS IMPORTANTES
 
 É necessário setar os valores das envs com esses valores:
 `PORT=3005`
