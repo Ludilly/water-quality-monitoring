@@ -51,7 +51,7 @@ Para inicializar a aplicação:
 
 Certifique-se de possuir o Docker instalado
 
-Execute o comando npm i ou npm install para instalar as dependencias do projeto
+Execute o comando `npm i` ou npm install para instalar as dependencias do projeto
 
 Abra o terminal na pasta raiz
 
