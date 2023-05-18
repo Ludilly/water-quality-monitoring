@@ -4,13 +4,20 @@ Repositório referente a um sistema de gerenciamento de análise de qualidade de
 Projeto de autoria própria, cujo principal objetivo desse projeto foi fazer uma aplicação Fullstack em node e ReactJs.
 
 ## Tecnologias usadas:
-backend:
+## backend:
 - Node/express
 - Docker
-frontend:
+- Typesctipt
+- Eslint
+## frontend:
 - React
 - Vite
 - Mui
+- Typesctipt
+- Eslint
+- Axios
+- JSCookies
+- react-toastfy
 
 ---
 
@@ -44,7 +51,7 @@ Rotas:
 
 ## Como utilizar a aplicação?
 
-###Backend
+### Backend
 
 
 Para inicializar a aplicação:
@@ -63,7 +70,7 @@ Renomeie a pasta `example.env` para `.env` ou crie uma pasta `.env` com as mesma
 
 A aplicação irá rodar na porta 3005 do localhost
 
-###Frontend
+### Frontend
 
 
 Para inicializar a aplicação:
