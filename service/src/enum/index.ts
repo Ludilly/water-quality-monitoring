@@ -8,14 +8,3 @@ export enum AGENTS_LIMITS {
   CADMIO_TOTAL = 0.001,
   DBO = 5
 }
-
-export enum AGENTS_NAME {
-  ALUMINIO_DISSOLVIDO = 'aluminio',
-  ARSENIO_TOTAL = 'arsenio',
-  CHUMBO_TOTAL = 'chumbo',
-  COBRE_DISSOLVIDO = 'cobre',
-  ESCHERICHIA_COLI = 'escherichia coli',
-  CROMO_TOTAL = 'cromo',
-  CADMIO_TOTAL = 'cadmio',
-  DBO = 'dbo'
-}

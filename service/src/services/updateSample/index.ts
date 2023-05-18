@@ -13,16 +13,17 @@ type UpdateData = {
   pontoDeColeta: String;
 }
 
-export const updateSampleById = async ({
-  id, agente, valor, cidade, estado, pontoDeColeta,
-}: UpdateData) => {
+export const updateSampleById = async (data: UpdateData) => {
   try {
     await connectDatabase();
-    await SampleAnalyzedModel.findOne({ _id: ObjectId(id) });
+    await SampleAnalyzedModel.findOne({ _id: ObjectId(data.id) });
+
     const updateAnalysisById = await SampleAnalyzedModel
       .updateOne({
         $set: {
-          agente, valor, cidade, estado, pontoDeColeta, limiteMaximo: AGENTS_LIMITS[agente],
+          ...data,
+          status: data.valor > AGENTS_LIMITS[data.agente]
+            ? 'Valor acima da média permitida' : 'Valor dentro da média',
         },
       });
     return updateAnalysisById;

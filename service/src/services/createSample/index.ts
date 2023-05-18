@@ -13,7 +13,6 @@ export const createSampleAnalysis = async (request: any) => {
       status: data.valor > AGENTS_LIMITS[data.agente]
         ? 'Valor acima da média permitida' : 'Valor dentro da média',
     });
-
   } catch (error) {
     console.error(error);
   } finally {

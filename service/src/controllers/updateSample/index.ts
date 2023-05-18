@@ -8,14 +8,16 @@ export const updateSampleContorller = async (req: server.Request, res: server.Re
     agente, valor, cidade, estado, pontoDeColeta,
   } = req.body;
   try {
-    const result = await updateSampleById({
+    const data = {
       id,
       agente,
       valor,
       cidade,
       estado,
       pontoDeColeta,
-    });
+    };
+
+    const result = await updateSampleById(data);
 
     return res.status(statusResponse.OK).json({ result });
   } catch (error: any) {

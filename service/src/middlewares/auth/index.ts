@@ -23,6 +23,7 @@ export const authorization = (req: Request, res: Response, next: NextFunction) =
 
     next();
   } catch (error) {
+    console.log('erro::', error);
     console.error(error);
   }
 };
