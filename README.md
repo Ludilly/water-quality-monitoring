@@ -45,6 +45,8 @@ Rotas:
 ## Como utilizar a aplicação?
 
 ###Backend
+
+
 Para inicializar a aplicação:
 
 Certifique-se de possuir o Docker instalado
@@ -62,6 +64,7 @@ Renomeie a pasta example.env para .env ou crie uma pasta .env com as mesmas vari
 A aplicação irá rodar na porta 3005 do localhost
 
 ###Frontend
+
 
 Para inicializar a aplicação:
 
