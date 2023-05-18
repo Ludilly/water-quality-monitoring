@@ -51,15 +51,15 @@ Para inicializar a aplicação:
 
 Certifique-se de possuir o Docker instalado
 
-Execute o comando `npm i` ou npm install para instalar as dependencias do projeto
+Execute o comando `npm i` ou `npm install` para instalar as dependencias do projeto
 
 Abra o terminal na pasta raiz
 
-Execute o comando docker-compose up --build
+Execute o comando `docker-compose up --build`
 
 O banco de dados irá rodar na porta 3005 do localhost
 
-Renomeie a pasta example.env para .env ou crie uma pasta .env com as mesmas variáveis de ambiente definidas
+Renomeie a pasta `example.env` para `.env` ou crie uma pasta `.env` com as mesmas variáveis de ambiente definidas
 
 A aplicação irá rodar na porta 3005 do localhost
 
@@ -68,9 +68,9 @@ A aplicação irá rodar na porta 3005 do localhost
 
 Para inicializar a aplicação:
 
-Execute o comando npm i ou npm install para instalar as dependencias do projeto
+Execute o comando `npm i` ou `npm install` para instalar as dependencias do projeto
 
-Rode o comando npm run dev para startar a aplicação, que irá rodar na porta 5173.
+Rode o comando `npm run dev para startar a aplicação, que irá rodar na porta 5173.
 
 OBS.: Para logar, xxxxxxxxxx
 
