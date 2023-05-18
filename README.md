@@ -68,6 +68,9 @@ A aplicação irá rodar na porta 3005 do localhost
 
 Para inicializar a aplicação:
 
+É MUITO necessário que você utilize uma versão do node acima de 16, pois o bundle está programado para rodar acima dessas versões
+para isso, utilize o comando `nvm use 16xxxx ` ou maior
+
 Execute o comando `npm i` ou `npm install` para instalar as dependencias do projeto
 
 Rode o comando `npm run dev para startar a aplicação, que irá rodar na porta 5173.
