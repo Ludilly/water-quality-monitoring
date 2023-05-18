@@ -18,3 +18,8 @@ export interface Option {
   value: string;
   label: string;
 }
+
+export interface CreateAnalysisFormProps {
+  setOpenModal: (open: boolean) => void;
+  openModal: boolean;
+}

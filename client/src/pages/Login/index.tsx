@@ -4,7 +4,7 @@ import Cookie from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from 'moment';
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { useMediaQuery, Box, Button, Grid, TextField, Typography, useTheme } from '@mui/material';
 import Loading from '../../components/Loading';
 
 const Login = () => {
@@ -13,20 +13,21 @@ const Login = () => {
   const [erro, setErro] = useState(false);
   const navigate = useNavigate();
   const NUMBER_OF_CHARACTERS = 6;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    setCredentials((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
 
     if (credentials.password.length <= NUMBER_OF_CHARACTERS) {
       setErro(true);
     } else {
       setErro(false);
     }
+    setCredentials((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -34,8 +35,9 @@ const Login = () => {
     try {
       setLoading(true);
       const { status, data } = await axios.post('http://localhost:3005/login', credentials);
+      console.log(data);
       if (status === 200) {
-        Cookie.set('token', JSON.stringify(data.token), {
+        Cookie.set('token', encodeURIComponent(data.token), {
           expires: moment().add(24, 'hours').toDate(),
         });
         toast.success('Você está logado!');
@@ -51,7 +53,7 @@ const Login = () => {
 
   return (
     <Grid height='100vh' display='flex' justifyContent='center' alignItems='center'>
-      <form style={{ width: '50%' }} onSubmit={handleSubmit}>
+      <form style={{ width: isMobile ? '100%' : '50%' }} onSubmit={handleSubmit}>
         <Box
           sx={{
             width: 'auto',
@@ -71,7 +73,7 @@ const Login = () => {
             required
             type='email'
             onChange={handleChangeInput}
-            sx={{ width: '520px', marginBottom: '24px' }}
+            sx={{ width: isMobile ? '400px' : '520px', marginBottom: '24px' }}
             autoFocus
             label='Email'
             placeholder='Digite seu email'
@@ -84,7 +86,7 @@ const Login = () => {
             name='password'
             value={credentials.password}
             onChange={handleChangeInput}
-            sx={{ width: '520px', marginBottom: '56px' }}
+            sx={{ width: isMobile ? '400px' : '520px', marginBottom: '56px' }}
             autoFocus
             error={erro}
             helperText={erro ? 'Senha tem que ter mais de 6 caracteres' : ''}
@@ -94,7 +96,7 @@ const Login = () => {
           <Button
             type='submit'
             sx={{
-              width: '520px',
+              width: isMobile ? '400px' : '520px',
               textTransform: 'none',
               backgroundColor: '#94A3B8',
               color: '#f4f4f4',
@@ -108,7 +110,14 @@ const Login = () => {
           </Button>
         </Box>
       </form>
-      <Box sx={{ backgroundColor: '#06102B', height: '100vh', width: '50%' }} />
+      <Box
+        sx={{
+          backgroundColor: '#06102B',
+          height: '100vh',
+          width: '50%',
+          display: isMobile ? 'none' : null,
+        }}
+      />
     </Grid>
   );
 };

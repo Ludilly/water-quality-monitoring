@@ -14,7 +14,8 @@ import StatusTag from '../StatusTag';
 import { AgentsLimitsUnits, AgentsNames } from '../../enums';
 import EmptyTable from './EmptyTable';
 import { formatValueToUnit } from '../../helpers';
-import { Column, Row } from '../../interfaces';
+import { Column, Row } from '../../interfaces/components';
+import UpdateAnalysisForm from '../UpdateAnalysisForm';
 
 interface CustomTableProps {
   columns: Column[];
@@ -24,6 +25,8 @@ interface CustomTableProps {
 const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+  const [sampleId, setSampleId] = useState<string>('');
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -32,6 +35,15 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(Number(event.target.value));
     setPage(0);
+  };
+
+  const handleClickOpenUpdateModal = (id: string) => {
+    setSampleId(id);
+    setOpenUpdateModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenUpdateModal(false);
   };
 
   return (
@@ -54,7 +66,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
                 <TableRow>
                   {columns.map((column) => (
                     <TableCell
-                      sx={{ background: '#D7DCDF' }}
+                      sx={{ background: '#D7DCDF', fontWeight: 600 }}
                       key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth, borderRadius: column.borderRadius }}
@@ -67,8 +79,14 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
               <TableBody sx={{ backgroundColor: '#FFFFFF' }}>
                 {Array.isArray(rows)
                   && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <TableRow>
-                      <TableCell>{AgentsNames[row.agente as keyof typeof AgentsNames]}</TableCell>
+                    <TableRow
+                      sx={{ cursor: 'pointer' }}
+                      hover
+                      onClick={() => handleClickOpenUpdateModal(row._id)}
+                    >
+                      <TableCell>
+                        {AgentsNames[row.agente as keyof typeof AgentsNames]}
+                      </TableCell>
                       <TableCell>{row.pontoDeColeta}</TableCell>
                       <TableCell>{row.cidade}</TableCell>
                       <TableCell>{row.estado}</TableCell>
@@ -109,6 +127,14 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, rows }) => {
           />
         </Paper>
       )}
+      {openUpdateModal
+        && (
+          <UpdateAnalysisForm
+            sampleId={sampleId}
+            openModal={openUpdateModal}
+            setOpenModal={handleCloseModal}
+          />
+        )}
     </Box>
   );
 };

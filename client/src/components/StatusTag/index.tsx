@@ -16,7 +16,7 @@ const StatusTag = ({ status }: Status) => {
         label={status}
         sx={{
           fontWeight: 500,
-          fontSize: '12px',
+          fontSize: '14px',
           lineHeight: '20px',
           height: '32px',
           color: '#F4F4EF',
