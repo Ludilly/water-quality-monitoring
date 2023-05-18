@@ -77,6 +77,42 @@ OBS.: Para logar, xxxxxxxxxx
 
 ---
 
+## Rotas
+
+## POST/login
+
+Implementa a autenticação do usuário, recebendo as informações de login no seguinte formato:
+
+![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/856d17f8-86ae-4843-8ac2-d747bbac272b)
+
+Caso a autenticação seja bem sucedida, será retornado um token JWT com validade de 1 dia, que poderá ser utilizado para testar as demais rotas da aplicação.
+
+## GET/analysis
+Retorna uma lista com todos as análises criadas pelo usuário.
+
+Essa rota exige a autenticação através do token,gerado pela rota `POST /auth` e a passagem do username no header da requisição para possibilitar a busca dos projetos, que só acontecerá caso o token seja compatível com o usuário.
+
+## GET/analysis:id
+
+Busca uma única análise, recebendo o id no corpo da aplicação:
+
+![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/1d435046-7430-49d7-9d6c-d7265ad8669e)
+![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/838271aa-196e-4442-8fb5-a16b2db21d10)
+
+## GET/agent/:agent
+Busca uma lista de análise filtradas pelo nome do agente
+
+## PUT /projects/:id
+Uma amostra é atualizada ao passar um `id` como parâmetro
+
+![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/8d44037e-4c9b-457c-8fb2-c1adabd92e73)
+
+## POST/createSample
+
+Cria uma análise para ser renderizada
+![image](https://github.com/Ludilly/water-quality-monitoring/assets/72472350/99027260-77de-4007-9141-70abdb855a35)
+
+
 ## O que poderia melhorar?
 
 Acredito que eu poderia melhorar essas aplicações e, abaixo, cito alguns pontos:
