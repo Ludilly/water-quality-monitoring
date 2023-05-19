@@ -149,3 +149,4 @@ Acredito que eu poderia melhorar essas aplicações e, abaixo, cito alguns ponto
  - Adição de um gerenciador de estado com Redux para deixar a aplicação escalável para um crescimento maior
  - Criação de testes em Cypress no front para testar a jornada do usuário
  - Documentação da API através do Swagger
+ - Criação de uma página de exibição de detalhe da coleta
